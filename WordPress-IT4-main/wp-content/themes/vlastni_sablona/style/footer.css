@@ -1,35 +1,99 @@
-footer{
-    width: 100%;
-    height: 200px;
-    background-color: #202020;
-    color: white;
-    
-    .wrapper{
-        display: flex;
-        flex-direction: column;
-        max-width: 1300px;
-        margin: auto;
-        height: 100%;
+/* === OPRAVENÝ FOOTER S VIDITELNÝM TEXTEM A BAREVNÝM POZADÍM === */
+.footer-ocean {
+  position: relative;
+  /* přechod mezi tmavší a světlejší modrou */
+  background: linear-gradient(180deg, #0b1220 0%, #1a237e 40%, #4f86f7 100%);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+  padding: 0;
+}
 
-        .wrapper-content{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 36px;
-            padding: 36px 6px;
-            /*height: 100%;*/
-            
-            h2{
-                font-family: Arial, Helvetica, sans-serif;
-                font-weight: bold;
-            }
+/* zruší bílé pozadí wrapperu pouze ve footeru */
+.footer-ocean .wrapper,
+.footer-ocean .wrapper * {
+  background: transparent !important;
+  color: #fff !important;
+  opacity: 1 !important;
+}
 
-            p{
-                font-family: Arial, Helvetica, sans-serif;
-                text-align: center;
-                
-            }
-        }
-    }
+/* obsah – nad vlnami, text viditelný */
+.footer-ocean .content {
+  position: relative;
+  z-index: 2;
+  padding-top: 150px; /* prostor nad vlnami */
+  padding-bottom: 60px;
+  color: #fff;
+}
+
+/* KONTEJNER VLN POD OBSAHEM */
+.footer-ocean .waves {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 130px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  line-height: 0;
+}
+
+/* dvě vrstvy vln */
+.footer-ocean .wave {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200%;
+  height: 130px;
+  display: block;
+  will-change: transform;
+}
+
+/* barvy vln */
+.footer-ocean .wave-back path {
+  fill: #2b3a88; /* tmavší modrá */
+  opacity: 0.9;
+}
+.footer-ocean .wave-front path {
+  fill: #4f86f7; /* světlejší modrá */
+  opacity: 0.95;
+}
+
+/* animace posunu vln */
+@keyframes waveShiftSlow { to { transform: translateX(-50%); } }
+@keyframes waveShiftFast { to { transform: translateX(-50%); } }
+
+.footer-ocean .wave-back {
+  animation: waveShiftSlow 20s linear infinite;
+}
+.footer-ocean .wave-front {
+  animation: waveShiftFast 12s linear infinite;
+}
+
+/* spodní proužek footeru (copyright, odkazy apod.) */
+.wrapper-footer {
+  background: #1a237e; /* tmavě modrý pruh dole */
+  border-top: 2px solid #3949ab;
+  padding: 12px 0;
+  font-size: 0.95rem;
+  color: #cfe1ff;
+}
+
+/* odkazy v sociální sekci */
+.wrapper-content-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.wrapper-content-social a:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.45);
 }
